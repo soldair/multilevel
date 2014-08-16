@@ -13,10 +13,6 @@ test('end should be passed to server from client', function (t) {
 
 
   var fakeConnection = through();
-  //var fakeConnection = through(function(data){
-  //  console.log(data);
-  //  this.queue(data);
-  //});
 
   // get a reference to the server read stream
   db.createReadStream = function () {
@@ -25,7 +21,7 @@ test('end should be passed to server from client', function (t) {
       t.ok("end was called!");
     })
 
-    setImmediate(function(){
+    process.nextTick(function(){
       stream.write("hi")
     });
     return stream;
